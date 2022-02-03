@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.adhito.inixindo_project_0004.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -35,6 +36,36 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.navigation_item, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    Fragment fragment = null;
+    // Salah satu Options dipilih dan action-nya
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                fragment = new HomeFragment();
+                getSupportActionBar().setTitle("Home");
+                binding.drawer.closeDrawer(GravityCompat.START);
+                callFragment(fragment);
+                break;
+            case R.id.nav_contact_us:
+                fragment = new ContactUsFragment();
+                getSupportActionBar().setTitle("Contact Us");
+                binding.drawer.closeDrawer(GravityCompat.START);
+                callFragment(fragment);
+                break;
+            case R.id.nav_about_us:
+                fragment = new AboutUsFragment();
+                getSupportActionBar().setTitle("About Us");
+                binding.drawer.closeDrawer(GravityCompat.START);
+                callFragment(fragment);
+                break;
+            default:
+                Toast.makeText(this, "No Menu is selected", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void initView() {
         // Custom ToolBar
