@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.adhito.inixindo_project_0004.databinding.ActivityMainBinding;
@@ -88,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Sinkronisasi Drawer
         toggle.syncState();
-        
+
         // Salah satu menu navigasi dipilih
         binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             Fragment fragment = null;
-            
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -117,13 +121,25 @@ public class MainActivity extends AppCompatActivity {
                         callFragment(fragment);
                         break;
 
-                    case R.id.btn_manage_account:
-                        fragment = new ManageAccountFragment();
-                        getSupportActionBar().setTitle("Manage Account");
-                        callFragment(fragment);
-                        break;
                 }
                 return true;
+            }
+        });
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = getLayoutInflater().inflate(R.layout.nav_header_layout,
+                navigationView, false);
+        navigationView.addHeaderView(headerView);
+
+        Button btn_manage_account = headerView.findViewById(R.id.btn_manage_account);
+        btn_manage_account.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://github.com/Adhito"));
+                startActivity(intent);
             }
         });
     }
