@@ -38,7 +38,6 @@
             android:layout_gravity="start"
             android:background="@color/white"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_layout"
             app:itemBackground="@drawable/item_selected"
             app:itemHorizontalPadding="42dp"
             app:itemIconPadding="32dp"
